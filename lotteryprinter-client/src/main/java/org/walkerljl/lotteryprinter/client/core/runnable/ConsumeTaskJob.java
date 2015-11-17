@@ -6,17 +6,17 @@ import org.walkerljl.lotteryprinter.client.common.LogUtils;
 import org.walkerljl.lotteryprinter.client.common.PrintUtils;
 import org.walkerljl.lotteryprinter.client.common.PropertiesUtils;
 import org.walkerljl.lotteryprinter.client.core.ScheduleCenter;
+import org.walkerljl.lotteryprinter.client.entity.Task;
 import org.walkerljl.lotteryprinter.client.enums.ConsumerState;
 import org.walkerljl.lotteryprinter.client.enums.ProducerState;
 import org.walkerljl.lotteryprinter.client.enums.SystemState;
-import org.walkerljl.lotteryprinter.client.pojo.Task;
 
 /**
  * 消费者
  * 
  * @author lijunlin
  */
-public class ConsumeTaskTarget implements Runnable
+public class ConsumeTaskJob implements Runnable
 {
 	/** 调度员*/
 	private ScheduleCenter scheduler;
@@ -34,7 +34,7 @@ public class ConsumeTaskTarget implements Runnable
 	 * 
 	 * @param printQueue
 	 */
-	public ConsumeTaskTarget(PrintService printService, ScheduleCenter scheduler)
+	public ConsumeTaskJob(PrintService printService, ScheduleCenter scheduler)
 	{
 		this.printService = printService;
 		this.scheduler = scheduler;

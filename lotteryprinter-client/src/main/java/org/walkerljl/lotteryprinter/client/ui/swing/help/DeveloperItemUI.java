@@ -1,8 +1,8 @@
 package org.walkerljl.lotteryprinter.client.ui.swing.help;
 
-import org.walkerljl.lotteryprinter.client.MainUI;
 import org.walkerljl.lotteryprinter.client.common.MessageUtils;
 import org.walkerljl.lotteryprinter.client.ui.swing.ItemAction;
+import org.walkerljl.lotteryprinter.client.ui.swing.MainUI;
 
 /**
  * 开发者信息UI

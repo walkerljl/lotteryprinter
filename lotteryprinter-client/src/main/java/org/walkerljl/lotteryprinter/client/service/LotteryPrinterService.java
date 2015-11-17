@@ -3,8 +3,8 @@ package org.walkerljl.lotteryprinter.client.service;
 import java.util.Map;
 import java.util.Set;
 
+import org.walkerljl.lotteryprinter.client.entity.Task;
 import org.walkerljl.lotteryprinter.client.enums.SystemState;
-import org.walkerljl.lotteryprinter.client.pojo.Task;
 
 /**
  * 彩票打印业务接口

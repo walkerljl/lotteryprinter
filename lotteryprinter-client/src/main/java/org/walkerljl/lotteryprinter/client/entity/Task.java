@@ -1,4 +1,4 @@
-package org.walkerljl.lotteryprinter.client.pojo;
+package org.walkerljl.lotteryprinter.client.entity;
 
 /**
  * 任务

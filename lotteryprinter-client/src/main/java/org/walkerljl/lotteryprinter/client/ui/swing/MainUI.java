@@ -1,4 +1,4 @@
-package org.walkerljl.lotteryprinter.client;
+package org.walkerljl.lotteryprinter.client.ui.swing;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -16,20 +16,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.walkerljl.lotteryprinter.client.common.LogUtils;
 import org.walkerljl.lotteryprinter.client.common.MessageUtils;
 import org.walkerljl.lotteryprinter.client.common.SystemProperties;
 import org.walkerljl.lotteryprinter.client.service.LotteryPrinterService;
 import org.walkerljl.lotteryprinter.client.service.impl.LotteryPrinterServiceImpl;
-import org.walkerljl.lotteryprinter.client.ui.swing.ItemAction;
 
 /**
- * MainUI
+ * 主UI
  *
  * @author lijunlin
  */
 public class MainUI extends JFrame implements ActionListener {
+	
 	private static final long serialVersionUID = 1L;
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(MainUI.class);
+	
 	/*
 	 * 主窗体元素
 	 */
@@ -239,8 +244,9 @@ public class MainUI extends JFrame implements ActionListener {
 	 * @param clazzName
 	 */
 	private void actions(String clazzName) {
+		Class<?> clazz = null;
 		try {
-			Class<?> clazz = Class.forName("org.walkerljl.lotteryprinter.client.ui.swing."
+			clazz = Class.forName("org.walkerljl.lotteryprinter.client.ui.swing."
 					+ clazzName);
 			Constructor<?> constructor = clazz.getConstructor(MainUI.class);
 			ItemAction itemAction = (ItemAction) constructor.newInstance(this);
@@ -248,8 +254,9 @@ public class MainUI extends JFrame implements ActionListener {
 			itemAction.action();
 
 		} catch (Exception ex) {
-			logger.error("系统无法响应您的操作！");
-			ex.printStackTrace();
+			String errMsg = "创建响应UI出错, " + clazz;
+			logger.error(errMsg);
+			LOGGER.error(errMsg, errMsg);
 		}
 	}
 
@@ -290,15 +297,6 @@ public class MainUI extends JFrame implements ActionListener {
 		this.setVisible(false);
 		this.dispose();
 		System.exit(0);
-	}
-
-	/**
-	 * 应用入口
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		new MainUI();
 	}
 
 	/**

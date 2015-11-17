@@ -2,11 +2,11 @@ package org.walkerljl.lotteryprinter.client.ui.swing.setting;
 
 import javax.swing.JOptionPane;
 
-import org.walkerljl.lotteryprinter.client.MainUI;
 import org.walkerljl.lotteryprinter.client.common.LogUtils;
 import org.walkerljl.lotteryprinter.client.common.MessageUtils;
 import org.walkerljl.lotteryprinter.client.common.PropertiesUtils;
 import org.walkerljl.lotteryprinter.client.ui.swing.ItemAction;
+import org.walkerljl.lotteryprinter.client.ui.swing.MainUI;
 
 /**
  * 设置任务分配时间间隔UI

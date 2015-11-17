@@ -9,15 +9,15 @@ import org.walkerljl.lotteryprinter.client.common.ExcelUtils;
 import org.walkerljl.lotteryprinter.client.common.ExcelUtilException;
 import org.walkerljl.lotteryprinter.client.common.LogUtils;
 import org.walkerljl.lotteryprinter.client.core.ScheduleCenter;
-import org.walkerljl.lotteryprinter.client.pojo.Lottery;
-import org.walkerljl.lotteryprinter.client.pojo.Task;
+import org.walkerljl.lotteryprinter.client.entity.Lottery;
+import org.walkerljl.lotteryprinter.client.entity.Task;
 
 /**
  * 加载数据
  * 
  * @author lijunlin
  */
-public class LoadExcelTarget implements Runnable {
+public class LoadExcelJob implements Runnable {
 	/** 调度员 */
 	private ScheduleCenter scheduler;
 	/** Excel文件路径 */
@@ -36,7 +36,7 @@ public class LoadExcelTarget implements Runnable {
 	 * @param filePath
 	 * @param header
 	 */
-	public LoadExcelTarget(ScheduleCenter scheduler, String filePath,
+	public LoadExcelJob(ScheduleCenter scheduler, String filePath,
 			String[] header) {
 		this.scheduler = scheduler;
 		this.filePath = filePath;

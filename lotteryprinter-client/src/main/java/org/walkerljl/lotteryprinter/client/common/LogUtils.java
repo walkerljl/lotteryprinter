@@ -1,11 +1,15 @@
 package org.walkerljl.lotteryprinter.client.common;
 
 import java.awt.Color;
+
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -14,6 +18,9 @@ import javax.swing.text.StyleConstants;
  * @author lijunlin
  */
 public class LogUtils {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(LogUtils.class);
+	
 	private static JTextPane textPane;
 
 	private static LogUtils instance;
@@ -50,12 +57,13 @@ public class LogUtils {
 		Document doc = textPane.getDocument();
 		SimpleAttributeSet attrSet = new SimpleAttributeSet();
 		StyleConstants.setForeground(attrSet, color);
-		if (type.equals("ALERT"))
+		if (type.equals("ALERT")) {
 			StyleConstants.setBold(attrSet, true);
-		else
+		} else {
 			StyleConstants.setBold(attrSet, false);
-		StyleConstants.setFontSize(attrSet, 14);
-		StyleConstants.setFontFamily(attrSet, "Courier");
+			StyleConstants.setFontSize(attrSet, 14);
+			StyleConstants.setFontFamily(attrSet, "Courier");
+		}
 
 		//处理显示信息
 		StringBuilder result = new StringBuilder();
@@ -68,8 +76,7 @@ public class LogUtils {
 			textPane.setCaretPosition(doc.getLength());
 
 		} catch (BadLocationException e) {
-			e.printStackTrace();
+			LOGGER.error("绘制日志内容出错:", e.getMessage(), e);
 		}
 	}
-
 }

@@ -21,8 +21,8 @@ import javax.swing.JPanel;
 
 import org.walkerljl.lotteryprinter.client.common.PrintUtils;
 import org.walkerljl.lotteryprinter.client.common.SystemProperties;
-import org.walkerljl.lotteryprinter.client.pojo.Lottery;
-import org.walkerljl.lotteryprinter.client.pojo.Task;
+import org.walkerljl.lotteryprinter.client.entity.Lottery;
+import org.walkerljl.lotteryprinter.client.entity.Task;
 
 /**
  * 打印预览对话框

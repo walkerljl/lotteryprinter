@@ -10,11 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.walkerljl.lotteryprinter.client.MainUI;
 import org.walkerljl.lotteryprinter.client.common.MessageUtils;
 import org.walkerljl.lotteryprinter.client.common.PropertiesUtils;
 import org.walkerljl.lotteryprinter.client.common.SystemProperties;
 import org.walkerljl.lotteryprinter.client.ui.swing.ItemAction;
+import org.walkerljl.lotteryprinter.client.ui.swing.MainUI;
 
 public class CoordItemUI extends JFrame implements ItemAction, ActionListener {
 	private static final long serialVersionUID = 1L;

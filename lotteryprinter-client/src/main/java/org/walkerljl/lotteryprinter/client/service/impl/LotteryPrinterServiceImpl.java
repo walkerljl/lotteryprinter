@@ -10,9 +10,9 @@ import javax.print.PrintService;
 import org.walkerljl.lotteryprinter.client.common.PrintUtils;
 import org.walkerljl.lotteryprinter.client.core.ScheduleCenter;
 import org.walkerljl.lotteryprinter.client.core.ScheduleException;
+import org.walkerljl.lotteryprinter.client.entity.Task;
 import org.walkerljl.lotteryprinter.client.enums.ProducerState;
 import org.walkerljl.lotteryprinter.client.enums.SystemState;
-import org.walkerljl.lotteryprinter.client.pojo.Task;
 import org.walkerljl.lotteryprinter.client.service.LotteryPrinterService;
 
 /**

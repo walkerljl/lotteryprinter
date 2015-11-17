@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
  * @author lijunlin
  */
 public class MessageUtils {
+	
 	/**
 	 * 警告信息
 	 * 
@@ -19,11 +20,20 @@ public class MessageUtils {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
+	/**
+	 * INFO
+	 * @param content
+	 */
 	public static void info(String content) {
 		JOptionPane.showMessageDialog(null, content, "消息",
 				JOptionPane.PLAIN_MESSAGE);
 	}
 
+	/**
+	 * 确认
+	 * @param content
+	 * @return
+	 */
 	public static int confirm(String content) {
 		return JOptionPane.showConfirmDialog(null, content, "提示",
 				JOptionPane.YES_NO_CANCEL_OPTION);

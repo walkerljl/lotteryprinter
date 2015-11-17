@@ -4,16 +4,16 @@ import java.util.Map;
 
 import org.walkerljl.lotteryprinter.client.common.LogUtils;
 import org.walkerljl.lotteryprinter.client.core.ScheduleCenter;
+import org.walkerljl.lotteryprinter.client.entity.Task;
 import org.walkerljl.lotteryprinter.client.enums.ConsumerState;
 import org.walkerljl.lotteryprinter.client.enums.ProducerState;
-import org.walkerljl.lotteryprinter.client.pojo.Task;
 
 /**
  * 生产者
  * 
  * @author lijunlin
  */
-public class ProduceTaskTarget implements Runnable {
+public class ProduceTaskJob implements Runnable {
 	/** 调度员 */
 	private ScheduleCenter scheduler;
 	/** 日志 */
@@ -26,7 +26,7 @@ public class ProduceTaskTarget implements Runnable {
 	 * @param path
 	 * @param header
 	 */
-	public ProduceTaskTarget(ScheduleCenter scheduler) {
+	public ProduceTaskJob(ScheduleCenter scheduler) {
 		this.scheduler = scheduler;
 		// 设置线程名称
 		Thread.currentThread().setName("Producer");

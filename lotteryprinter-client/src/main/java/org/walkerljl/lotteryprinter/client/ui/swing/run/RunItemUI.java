@@ -2,10 +2,10 @@ package org.walkerljl.lotteryprinter.client.ui.swing.run;
 
 import java.util.Map;
 
-import org.walkerljl.lotteryprinter.client.MainUI;
 import org.walkerljl.lotteryprinter.client.common.LogUtils;
 import org.walkerljl.lotteryprinter.client.common.MessageUtils;
 import org.walkerljl.lotteryprinter.client.ui.swing.ItemAction;
+import org.walkerljl.lotteryprinter.client.ui.swing.MainUI;
 
 /**
  * 
@@ -28,10 +28,11 @@ public class RunItemUI implements ItemAction {
 
 	@Override
 	public void action() {
-		if (this.mainUI.isPause())
+		if (this.mainUI.isPause()) {
 			executePrintAction();
-		else
+		} else {
 			pausePrintAction();
+		}
 	}
 
 	/**

@@ -16,10 +16,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import org.walkerljl.lotteryprinter.client.MainUI;
 import org.walkerljl.lotteryprinter.client.common.PrintUtils;
 import org.walkerljl.lotteryprinter.client.common.SystemProperties;
 import org.walkerljl.lotteryprinter.client.ui.swing.ItemAction;
+import org.walkerljl.lotteryprinter.client.ui.swing.MainUI;
 
 /**
  * 

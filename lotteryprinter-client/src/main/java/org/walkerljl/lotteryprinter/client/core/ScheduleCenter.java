@@ -13,14 +13,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.print.PrintService;
 
-import org.walkerljl.lotteryprinter.client.core.runnable.AddTaskByIdsTarget;
-import org.walkerljl.lotteryprinter.client.core.runnable.ConsumeTaskTarget;
-import org.walkerljl.lotteryprinter.client.core.runnable.LoadExcelTarget;
-import org.walkerljl.lotteryprinter.client.core.runnable.ProduceTaskTarget;
+import org.walkerljl.lotteryprinter.client.core.runnable.AddTaskByIdsJob;
+import org.walkerljl.lotteryprinter.client.core.runnable.ConsumeTaskJob;
+import org.walkerljl.lotteryprinter.client.core.runnable.LoadExcelJob;
+import org.walkerljl.lotteryprinter.client.core.runnable.ProduceTaskJob;
+import org.walkerljl.lotteryprinter.client.entity.Task;
 import org.walkerljl.lotteryprinter.client.enums.ConsumerState;
 import org.walkerljl.lotteryprinter.client.enums.ProducerState;
 import org.walkerljl.lotteryprinter.client.enums.SystemState;
-import org.walkerljl.lotteryprinter.client.pojo.Task;
 
 /**
  * 任务调度中心
@@ -78,7 +78,7 @@ public class ScheduleCenter {
 		// 设置当前打印文件名
 		this.currentFileName = new File(path).getName();
 		// 创建一个线程去加载Excel文件
-		threadPool.execute(new LoadExcelTarget(this, path, header));
+		threadPool.execute(new LoadExcelJob(this, path, header));
 	}
 
 	/*
@@ -89,7 +89,7 @@ public class ScheduleCenter {
 		setSystemState(SystemState.RUNNING);
 		setProducerState(ProducerState.PRODUCING);
 
-		threadPool.execute(new ProduceTaskTarget(this));
+		threadPool.execute(new ProduceTaskJob(this));
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class ScheduleCenter {
 		setProducerState(ProducerState.PRODUCING);
 
 		// 创建一个服务线程
-		threadPool.execute(new AddTaskByIdsTarget(this, idSet));
+		threadPool.execute(new AddTaskByIdsJob(this, idSet));
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class ScheduleCenter {
 
 		// 为每一个打印服务创建线程去处理任务
 		for (PrintService printService : printServices) {
-			threadPool.execute(new ConsumeTaskTarget(printService, this));
+			threadPool.execute(new ConsumeTaskJob(printService, this));
 		}
 	}
 

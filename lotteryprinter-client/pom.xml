@@ -4,11 +4,19 @@
 	<parent>
 		<groupId>org.walkerljl.lotteryprinter</groupId>
 		<artifactId>lotteryprinter</artifactId>
-		<version>1.0.0</version>
+		<version>3.0.1</version>
 	</parent>
 	<artifactId>lotteryprinter-client</artifactId>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.walkerljl.commons</groupId>
+			<artifactId>orgwalkerljl-commons-log</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.walkerljl.commons</groupId>
+			<artifactId>orgwalkerljl-commons-core</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>

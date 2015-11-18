@@ -6,6 +6,7 @@ package org.walkerljl.lotteryprinter.client.ui.swing;
  * @author lijunlin
  */
 public interface ItemAction {
+	
 	/**
 	 * 响应函数
 	 */

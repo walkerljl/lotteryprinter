@@ -1,10 +1,13 @@
 package org.walkerljl.lotteryprinter.client.ui.swing.setting;
 
+import java.util.Properties;
+
 import javax.swing.JOptionPane;
 
-import org.walkerljl.lotteryprinter.client.common.LogUtils;
+import org.walkerljl.commons.util.PropertiesUtils;
+import org.walkerljl.lotteryprinter.client.common.Constants;
+import org.walkerljl.lotteryprinter.client.common.LoggerUtils;
 import org.walkerljl.lotteryprinter.client.common.MessageUtils;
-import org.walkerljl.lotteryprinter.client.common.PropertiesUtils;
 import org.walkerljl.lotteryprinter.client.ui.swing.ItemAction;
 import org.walkerljl.lotteryprinter.client.ui.swing.MainUI;
 
@@ -14,8 +17,8 @@ import org.walkerljl.lotteryprinter.client.ui.swing.MainUI;
  * @author lijunlin
  */
 public class FontSizeItemUI implements ItemAction {
-	/** 文件路径 */
-	private String filePath = "./config/font-size.properties";
+	
+	private static final String PROPERTT_KEY = "fontSize";
 	/** 字体大小 */
 	private String fontSize;
 
@@ -26,8 +29,8 @@ public class FontSizeItemUI implements ItemAction {
 	 */
 	public FontSizeItemUI(MainUI mainUI) {
 		// 加载配置文件中的数据到界面
-		PropertiesUtils propertiesUtil = new PropertiesUtils(filePath);
-		this.fontSize = propertiesUtil.getValue("fontSize");
+		Properties properties = PropertiesUtils.createFromInputStream(getClass().getResourceAsStream(Constants.CONF_PROPERTIES));
+		this.fontSize = PropertiesUtils.getPropertyAsString(properties, PROPERTT_KEY);
 	}
 
 	@Override
@@ -47,13 +50,13 @@ public class FontSizeItemUI implements ItemAction {
 		}
 
 		try {
-			PropertiesUtils propertiesUtil = new PropertiesUtils();
-			propertiesUtil.setValue("fontSize", result);
-			propertiesUtil.store(filePath, "");
+			Properties properties = new Properties();
+			properties.setProperty(PROPERTT_KEY, result);
+			PropertiesUtils.writeToFile(properties, getClass().getResource(Constants.CONF_PROPERTIES).getFile());
 
 			MessageUtils.info("设置成功！");
 		} catch (Exception ex) {
-			LogUtils.getInstance().error("字体大小设置出错！");
+			LoggerUtils.getInstance().error("字体大小设置出错！");
 		}
 	}
 

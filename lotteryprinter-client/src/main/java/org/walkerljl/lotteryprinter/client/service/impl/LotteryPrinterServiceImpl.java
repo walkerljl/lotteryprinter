@@ -8,11 +8,11 @@ import java.util.Set;
 import javax.print.PrintService;
 
 import org.walkerljl.lotteryprinter.client.common.PrintUtils;
-import org.walkerljl.lotteryprinter.client.core.ScheduleCenter;
-import org.walkerljl.lotteryprinter.client.core.ScheduleException;
 import org.walkerljl.lotteryprinter.client.entity.Task;
 import org.walkerljl.lotteryprinter.client.enums.ProducerState;
 import org.walkerljl.lotteryprinter.client.enums.SystemState;
+import org.walkerljl.lotteryprinter.client.schedule.Scheduler;
+import org.walkerljl.lotteryprinter.client.schedule.ScheduleException;
 import org.walkerljl.lotteryprinter.client.service.LotteryPrinterService;
 
 /**
@@ -24,10 +24,10 @@ public class LotteryPrinterServiceImpl implements LotteryPrinterService {
 	/** Excel文件头 */
 	private static String[] header = { "serial_number", "activation_code" };
 	/** 调度员 */
-	private ScheduleCenter scheduler;
+	private Scheduler scheduler;
 
 	public LotteryPrinterServiceImpl() {
-		this.scheduler = new ScheduleCenter();
+		this.scheduler = new Scheduler();
 	}
 
 	@Override
@@ -60,12 +60,13 @@ public class LotteryPrinterServiceImpl implements LotteryPrinterService {
 	@Override
 	public boolean isRestOfTask() {
 		// 当前任务队列不为空
-		if (scheduler.getTaskQueue().size() > 0)
+		if (scheduler.getTaskQueue().size() > 0) {
 			return true;
-		else {
+		} else {
 			// 系统正在生产任务
-			if (scheduler.getProducerState() == ProducerState.PRODUCING)
+			if (scheduler.getProducerState() == ProducerState.PRODUCING) {
 				return true;
+			}
 		}
 
 		return false;

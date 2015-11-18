@@ -1,4 +1,4 @@
-package org.walkerljl.lotteryprinter.client.core;
+package org.walkerljl.lotteryprinter.client.schedule;
 
 import java.io.File;
 import java.util.List;
@@ -13,21 +13,21 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.print.PrintService;
 
-import org.walkerljl.lotteryprinter.client.core.runnable.AddTaskByIdsJob;
-import org.walkerljl.lotteryprinter.client.core.runnable.ConsumeTaskJob;
-import org.walkerljl.lotteryprinter.client.core.runnable.LoadExcelJob;
-import org.walkerljl.lotteryprinter.client.core.runnable.ProduceTaskJob;
 import org.walkerljl.lotteryprinter.client.entity.Task;
 import org.walkerljl.lotteryprinter.client.enums.ConsumerState;
 import org.walkerljl.lotteryprinter.client.enums.ProducerState;
 import org.walkerljl.lotteryprinter.client.enums.SystemState;
+import org.walkerljl.lotteryprinter.client.schedule.job.AddTaskByIdsJob;
+import org.walkerljl.lotteryprinter.client.schedule.job.ConsumerJob;
+import org.walkerljl.lotteryprinter.client.schedule.job.LoadExcelTaskJob;
+import org.walkerljl.lotteryprinter.client.schedule.job.ProducerJob;
 
 /**
- * 任务调度中心
+ * 调度者
  * 
  * @author lijunlin
  */
-public class ScheduleCenter {
+public class Scheduler {
 	/** 队列容量 */
 	public final static int TASK_QUEUE_CAPACITY = 10;
 	/** 一版彩票的张数 */
@@ -55,7 +55,7 @@ public class ScheduleCenter {
 	/**
 	 * 构造函数
 	 */
-	public ScheduleCenter() {
+	public Scheduler() {
 		threadPool = Executors.newCachedThreadPool();
 	}
 
@@ -78,7 +78,7 @@ public class ScheduleCenter {
 		// 设置当前打印文件名
 		this.currentFileName = new File(path).getName();
 		// 创建一个线程去加载Excel文件
-		threadPool.execute(new LoadExcelJob(this, path, header));
+		threadPool.execute(new LoadExcelTaskJob(this, path, header));
 	}
 
 	/*
@@ -89,7 +89,7 @@ public class ScheduleCenter {
 		setSystemState(SystemState.RUNNING);
 		setProducerState(ProducerState.PRODUCING);
 
-		threadPool.execute(new ProduceTaskJob(this));
+		threadPool.execute(new ProducerJob(this));
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class ScheduleCenter {
 
 		// 为每一个打印服务创建线程去处理任务
 		for (PrintService printService : printServices) {
-			threadPool.execute(new ConsumeTaskJob(printService, this));
+			threadPool.execute(new ConsumerJob(printService, this));
 		}
 	}
 

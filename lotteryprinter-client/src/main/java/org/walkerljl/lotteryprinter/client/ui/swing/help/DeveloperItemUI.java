@@ -1,5 +1,9 @@
 package org.walkerljl.lotteryprinter.client.ui.swing.help;
 
+import java.util.Properties;
+
+import org.walkerljl.commons.util.PropertiesUtils;
+import org.walkerljl.lotteryprinter.client.common.Constants;
 import org.walkerljl.lotteryprinter.client.common.MessageUtils;
 import org.walkerljl.lotteryprinter.client.ui.swing.ItemAction;
 import org.walkerljl.lotteryprinter.client.ui.swing.MainUI;
@@ -20,9 +24,14 @@ public class DeveloperItemUI implements ItemAction {
 
 	@Override
 	public void action() {
+		Properties properties = PropertiesUtils.createFromInputStream(getClass().getResourceAsStream(Constants.CONF_PROPERTIES));
 		// 显示开发者信息
 		StringBuilder info = new StringBuilder();
-		info.append("Developer: www.walkerljl.org\n").append("Mobile: 18682651280\n").append("Email: lijunlins@163.com\n").append("微信: walker_ljl\n").append("QQ: 1434487791\n");
+		info.append("技术支持: ").append(PropertiesUtils.getPropertyAsString(properties, "company")).append("\n");
+		info.append("电话: ").append(PropertiesUtils.getPropertyAsString(properties, "mobile")).append("\n");
+		info.append("邮箱: ").append(PropertiesUtils.getPropertyAsString(properties, "email")).append("\n");
+		info.append("微信: ").append(PropertiesUtils.getPropertyAsString(properties, "weixin")).append("\n");
+		info.append("QQ: ").append(PropertiesUtils.getPropertyAsString(properties, "qq")).append("\n");
 		MessageUtils.info(info.toString());
 	}
 

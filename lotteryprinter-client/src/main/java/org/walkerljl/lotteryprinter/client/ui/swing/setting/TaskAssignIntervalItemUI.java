@@ -1,10 +1,13 @@
 package org.walkerljl.lotteryprinter.client.ui.swing.setting;
 
+import java.util.Properties;
+
 import javax.swing.JOptionPane;
 
-import org.walkerljl.lotteryprinter.client.common.LogUtils;
+import org.walkerljl.commons.util.PropertiesUtils;
+import org.walkerljl.lotteryprinter.client.common.Constants;
+import org.walkerljl.lotteryprinter.client.common.LoggerUtils;
 import org.walkerljl.lotteryprinter.client.common.MessageUtils;
-import org.walkerljl.lotteryprinter.client.common.PropertiesUtils;
 import org.walkerljl.lotteryprinter.client.ui.swing.ItemAction;
 import org.walkerljl.lotteryprinter.client.ui.swing.MainUI;
 
@@ -14,8 +17,8 @@ import org.walkerljl.lotteryprinter.client.ui.swing.MainUI;
  * @author lijunlin
  */
 public class TaskAssignIntervalItemUI implements ItemAction {
-	/** 文件路径 */
-	private String filePath = "./config/task-assign-interval.properties";
+
+	private static final String PROPERTT_KEY = "taskAssignInterval";
 	/** 任务分配时间间隔 */
 	private String taskAssignInterval;
 
@@ -26,8 +29,8 @@ public class TaskAssignIntervalItemUI implements ItemAction {
 	 */
 	public TaskAssignIntervalItemUI(MainUI mainUI) {
 		// 加载配置文件中的数据到界面
-		PropertiesUtils propertiesUtil = new PropertiesUtils(filePath);
-		this.taskAssignInterval = propertiesUtil.getValue("taskAssignInterval");
+		Properties properties = PropertiesUtils.createFromInputStream(getClass().getResourceAsStream(Constants.CONF_PROPERTIES));
+		this.taskAssignInterval = PropertiesUtils.getPropertyAsString(properties, PROPERTT_KEY);
 	}
 
 	@Override
@@ -46,13 +49,12 @@ public class TaskAssignIntervalItemUI implements ItemAction {
 		}
 
 		try {
-			PropertiesUtils propertiesUtil = new PropertiesUtils();
-			propertiesUtil.setValue("taskAssignInterval", result);
-			propertiesUtil.store(filePath, "");
-
+			Properties properties = new Properties();
+			properties.setProperty(PROPERTT_KEY, result);
+			PropertiesUtils.writeToFile(properties, getClass().getResource(Constants.CONF_PROPERTIES).getFile());
 			MessageUtils.info("设置成功！");
 		} catch (Exception ex) {
-			LogUtils.getInstance().error("任务分配时间间隔设置出错！");
+			LoggerUtils.getInstance().error("任务分配时间间隔设置出错！", ex);
 		}
 	}
 

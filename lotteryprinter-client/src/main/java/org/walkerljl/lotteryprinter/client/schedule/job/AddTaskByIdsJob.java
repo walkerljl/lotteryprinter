@@ -1,13 +1,13 @@
-package org.walkerljl.lotteryprinter.client.core.runnable;
+package org.walkerljl.lotteryprinter.client.schedule.job;
 
 import java.util.Map;
 import java.util.Set;
 
-import org.walkerljl.lotteryprinter.client.common.LogUtils;
-import org.walkerljl.lotteryprinter.client.core.ScheduleCenter;
+import org.walkerljl.lotteryprinter.client.common.LoggerUtils;
 import org.walkerljl.lotteryprinter.client.entity.Task;
 import org.walkerljl.lotteryprinter.client.enums.ProducerState;
 import org.walkerljl.lotteryprinter.client.enums.SystemState;
+import org.walkerljl.lotteryprinter.client.schedule.Scheduler;
 
 /**
  * 根据任务编号添加任务到打印队列
@@ -16,11 +16,11 @@ import org.walkerljl.lotteryprinter.client.enums.SystemState;
  */
 public class AddTaskByIdsJob implements Runnable {
 	/** 调度员 */
-	private ScheduleCenter scheduler;
+	private Scheduler scheduler;
 	/** 需要重新打印的任务编号集合 */
 	private Set<Long> idSet;
 	/** 日志 */
-	private LogUtils logger = LogUtils.getInstance();
+	private LoggerUtils logger = LoggerUtils.getInstance();
 
 	/**
 	 * 构造函数
@@ -28,7 +28,7 @@ public class AddTaskByIdsJob implements Runnable {
 	 * @param scheduler
 	 * @param idSet
 	 */
-	public AddTaskByIdsJob(ScheduleCenter scheduler, Set<Long> idSet) {
+	public AddTaskByIdsJob(Scheduler scheduler, Set<Long> idSet) {
 		this.scheduler = scheduler;
 		this.idSet = idSet;
 	}

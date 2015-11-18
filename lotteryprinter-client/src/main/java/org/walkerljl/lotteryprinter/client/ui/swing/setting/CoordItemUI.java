@@ -5,13 +5,15 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.walkerljl.commons.util.PropertiesUtils;
+import org.walkerljl.lotteryprinter.client.common.Constants;
 import org.walkerljl.lotteryprinter.client.common.MessageUtils;
-import org.walkerljl.lotteryprinter.client.common.PropertiesUtils;
 import org.walkerljl.lotteryprinter.client.common.SystemProperties;
 import org.walkerljl.lotteryprinter.client.ui.swing.ItemAction;
 import org.walkerljl.lotteryprinter.client.ui.swing.MainUI;
@@ -19,8 +21,6 @@ import org.walkerljl.lotteryprinter.client.ui.swing.MainUI;
 public class CoordItemUI extends JFrame implements ItemAction, ActionListener {
 	private static final long serialVersionUID = 1L;
 
-	/** 配置文件路径 */
-	private String filePath = "./config/coord.properties";
 	/** 内容面板元素 */
 	private VersionCoordUI topVersion = new VersionCoordUI("顶部版本号");
 
@@ -150,68 +150,39 @@ public class CoordItemUI extends JFrame implements ItemAction, ActionListener {
 	 * 加载配置文件中的值到界面
 	 */
 	private void loadProperties() {
-		PropertiesUtils propertiesUtil = new PropertiesUtils(filePath);
+		Properties properties = PropertiesUtils.createFromInputStream(getClass().getResourceAsStream(Constants.CONF_PROPERTIES_PRINT_COORD));
 
 		// 加载配置文件中的数据
-		topVersion.setXValue(Double.parseDouble(propertiesUtil
-				.getValue("topVersionX")));
-		topVersion.setYValue(Double.parseDouble(propertiesUtil
-				.getValue("topVersionY")));
+		topVersion.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "topVersionX"));
+		topVersion.setYValue(PropertiesUtils.getPropertyAsFloat(properties, "topVersionY"));
 
-		lottery1.setXValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery1X")));
-		lottery1.setYValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery1Y")));
-		lottery2.setXValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery2X")));
-		lottery2.setYValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery2Y")));
-		lottery3.setXValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery3X")));
-		lottery3.setYValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery3Y")));
-		lottery4.setXValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery4X")));
-		lottery4.setYValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery4Y")));
-		lottery5.setXValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery5X")));
-		lottery5.setYValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery5Y")));
-		lottery6.setXValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery6X")));
-		lottery6.setYValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery6Y")));
-
-		lottery7.setXValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery7X")));
-		lottery7.setYValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery7Y")));
-		lottery8.setXValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery8X")));
-		lottery8.setYValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery8Y")));
-		lottery9.setXValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery9X")));
-		lottery9.setYValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery9Y")));
-		lottery10.setXValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery10X")));
-		lottery10.setYValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery10Y")));
-		lottery11.setXValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery11X")));
-		lottery11.setYValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery11Y")));
-		lottery12.setXValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery12X")));
-		lottery12.setYValue(Double.parseDouble(propertiesUtil
-				.getValue("lottery12Y")));
-
-		bottomVersion.setXValue(Double.parseDouble(propertiesUtil
-				.getValue("bottomVersionX")));
-		bottomVersion.setYValue(Double.parseDouble(propertiesUtil
-				.getValue("bottomVersionY")));
+		lottery1.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery1X"));
+		lottery1.setYValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery1Y"));
+		lottery2.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery2X"));
+		lottery2.setYValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery2Y"));
+		lottery3.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery3X"));
+		lottery3.setYValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery3Y"));
+		lottery4.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery4X"));
+		lottery4.setYValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery4Y"));
+		lottery5.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery5X"));
+		lottery5.setYValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery5Y"));
+		lottery6.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery6X"));
+		lottery6.setYValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery6Y"));
+		lottery7.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery7X"));
+		lottery7.setYValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery7Y"));
+		lottery8.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery8X"));
+		lottery8.setYValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery8Y"));
+		lottery9.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery9X"));
+		lottery9.setYValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery9Y"));
+		lottery10.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery10X"));
+		lottery10.setYValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery10Y"));
+		lottery11.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery11X"));
+		lottery11.setYValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery11Y"));
+		lottery12.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery12X"));
+		lottery12.setYValue(PropertiesUtils.getPropertyAsFloat(properties, "lottery12Y"));
+		
+		bottomVersion.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "bottomVersionX"));
+		bottomVersion.setYValue(PropertiesUtils.getPropertyAsFloat(properties, "bottomVersionY"));
 	}
 
 	/**
@@ -223,42 +194,40 @@ public class CoordItemUI extends JFrame implements ItemAction, ActionListener {
 			return;
 
 		try {
-			PropertiesUtils propertiesUtil = new PropertiesUtils();
-			propertiesUtil.setValue("topVersionX", topVersion.getXValue());
-			propertiesUtil.setValue("topVersionY", topVersion.getYValue());
+			Properties properties = new Properties();
+			properties.setProperty("topVersionX", topVersion.getXValue());
+			properties.setProperty("topVersionY", topVersion.getYValue());
 
-			propertiesUtil.setValue("lottery1X", lottery1.getXValue());
-			propertiesUtil.setValue("lottery1Y", lottery1.getYValue());
-			propertiesUtil.setValue("lottery2X", lottery2.getXValue());
-			propertiesUtil.setValue("lottery2Y", lottery2.getYValue());
-			propertiesUtil.setValue("lottery3X", lottery3.getXValue());
-			propertiesUtil.setValue("lottery3Y", lottery3.getYValue());
-			propertiesUtil.setValue("lottery4X", lottery4.getXValue());
-			propertiesUtil.setValue("lottery4Y", lottery4.getYValue());
-			propertiesUtil.setValue("lottery5X", lottery5.getXValue());
-			propertiesUtil.setValue("lottery5Y", lottery5.getYValue());
-			propertiesUtil.setValue("lottery6X", lottery6.getXValue());
-			propertiesUtil.setValue("lottery6Y", lottery6.getYValue());
+			properties.setProperty("lottery1X", lottery1.getXValue());
+			properties.setProperty("lottery1Y", lottery1.getYValue());
+			properties.setProperty("lottery2X", lottery2.getXValue());
+			properties.setProperty("lottery2Y", lottery2.getYValue());
+			properties.setProperty("lottery3X", lottery3.getXValue());
+			properties.setProperty("lottery3Y", lottery3.getYValue());
+			properties.setProperty("lottery4X", lottery4.getXValue());
+			properties.setProperty("lottery4Y", lottery4.getYValue());
+			properties.setProperty("lottery5X", lottery5.getXValue());
+			properties.setProperty("lottery5Y", lottery5.getYValue());
+			properties.setProperty("lottery6X", lottery6.getXValue());
+			properties.setProperty("lottery6Y", lottery6.getYValue());
 
-			propertiesUtil.setValue("lottery7X", lottery7.getXValue());
-			propertiesUtil.setValue("lottery7Y", lottery7.getYValue());
-			propertiesUtil.setValue("lottery8X", lottery8.getXValue());
-			propertiesUtil.setValue("lottery8Y", lottery8.getYValue());
-			propertiesUtil.setValue("lottery9X", lottery9.getXValue());
-			propertiesUtil.setValue("lottery9Y", lottery9.getYValue());
-			propertiesUtil.setValue("lottery10X", lottery10.getXValue());
-			propertiesUtil.setValue("lottery10Y", lottery10.getYValue());
-			propertiesUtil.setValue("lottery11X", lottery11.getXValue());
-			propertiesUtil.setValue("lottery11Y", lottery11.getYValue());
-			propertiesUtil.setValue("lottery12X", lottery12.getXValue());
-			propertiesUtil.setValue("lottery12Y", lottery12.getYValue());
+			properties.setProperty("lottery7X", lottery7.getXValue());
+			properties.setProperty("lottery7Y", lottery7.getYValue());
+			properties.setProperty("lottery8X", lottery8.getXValue());
+			properties.setProperty("lottery8Y", lottery8.getYValue());
+			properties.setProperty("lottery9X", lottery9.getXValue());
+			properties.setProperty("lottery9Y", lottery9.getYValue());
+			properties.setProperty("lottery10X", lottery10.getXValue());
+			properties.setProperty("lottery10Y", lottery10.getYValue());
+			properties.setProperty("lottery11X", lottery11.getXValue());
+			properties.setProperty("lottery11Y", lottery11.getYValue());
+			properties.setProperty("lottery12X", lottery12.getXValue());
+			properties.setProperty("lottery12Y", lottery12.getYValue());
 
-			propertiesUtil
-					.setValue("bottomVersionX", bottomVersion.getXValue());
-			propertiesUtil
-					.setValue("bottomVersionY", bottomVersion.getYValue());
+			properties.setProperty("bottomVersionX", bottomVersion.getXValue());
+			properties.setProperty("bottomVersionY", bottomVersion.getYValue());
 
-			propertiesUtil.store(filePath, "");
+			PropertiesUtils.writeToFile(properties, getClass().getResource(Constants.CONF_PROPERTIES_PRINT_COORD).getFile());
 
 			MessageUtils.info("                                设置成功！");
 		} catch (Exception ex) {

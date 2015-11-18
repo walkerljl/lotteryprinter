@@ -2,7 +2,7 @@ package org.walkerljl.lotteryprinter.client.ui.swing.run;
 
 import java.util.Map;
 
-import org.walkerljl.lotteryprinter.client.common.LogUtils;
+import org.walkerljl.lotteryprinter.client.common.LoggerUtils;
 import org.walkerljl.lotteryprinter.client.common.MessageUtils;
 import org.walkerljl.lotteryprinter.client.ui.swing.ItemAction;
 import org.walkerljl.lotteryprinter.client.ui.swing.MainUI;
@@ -51,7 +51,7 @@ public class RunItemUI implements ItemAction {
 					.getSelectedPrintServices().entrySet())
 				info.append(entry.getKey()).append("\n");
 			info.append("..........请耐心等待..........");
-			LogUtils.getInstance().info(info.toString());
+			LoggerUtils.getInstance().info(info.toString());
 
 			this.mainUI.setPause(false);
 			this.mainUI.getLotteryPrinterService().startConsumeTask(

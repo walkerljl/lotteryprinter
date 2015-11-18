@@ -1,4 +1,6 @@
-package org.walkerljl.lotteryprinter.client.common;
+package org.walkerljl.lotteryprinter.client.entity;
+
+import java.io.Serializable;
 
 /**
  * 打印坐标的相关信息
@@ -7,7 +9,10 @@ package org.walkerljl.lotteryprinter.client.common;
  * 
  * @author lijunlin
  */
-public class Position {
+public class Position implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	/** X坐标 */
 	private float x;
 	/** Y坐标 */

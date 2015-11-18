@@ -16,13 +16,26 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.walkerljl.lotteryprinter.client.common.LogUtils;
+import org.walkerljl.commons.log.Logger;
+import org.walkerljl.commons.log.LoggerFactory;
+import org.walkerljl.lotteryprinter.client.common.LoggerUtils;
 import org.walkerljl.lotteryprinter.client.common.MessageUtils;
 import org.walkerljl.lotteryprinter.client.common.SystemProperties;
 import org.walkerljl.lotteryprinter.client.service.LotteryPrinterService;
 import org.walkerljl.lotteryprinter.client.service.impl.LotteryPrinterServiceImpl;
+import org.walkerljl.lotteryprinter.client.ui.swing.file.FileImportItemUI;
+import org.walkerljl.lotteryprinter.client.ui.swing.help.DeveloperItemUI;
+import org.walkerljl.lotteryprinter.client.ui.swing.help.VersionItemUI;
+import org.walkerljl.lotteryprinter.client.ui.swing.reprint.BatchHandleItemUI;
+import org.walkerljl.lotteryprinter.client.ui.swing.reprint.ExcelHandleItemUI;
+import org.walkerljl.lotteryprinter.client.ui.swing.reprint.SingleHandleItemUI;
+import org.walkerljl.lotteryprinter.client.ui.swing.run.ProduceTaskItemUI;
+import org.walkerljl.lotteryprinter.client.ui.swing.run.RunItemUI;
+import org.walkerljl.lotteryprinter.client.ui.swing.run.SwitchItemUI;
+import org.walkerljl.lotteryprinter.client.ui.swing.service.ChoiceServiceItemUI;
+import org.walkerljl.lotteryprinter.client.ui.swing.setting.CoordItemUI;
+import org.walkerljl.lotteryprinter.client.ui.swing.setting.FontSizeItemUI;
+import org.walkerljl.lotteryprinter.client.ui.swing.setting.TaskAssignIntervalItemUI;
 
 /**
  * 主UI
@@ -76,10 +89,10 @@ public class MainUI extends JFrame implements ActionListener {
 	/** 滚动面板 */
 	private JScrollPane scrollPane = new JScrollPane(textPane);
 	/** 按钮事件、响应方法映射 */
-	private Map<String, String> itemActionMap = new HashMap<String, String>();
+	private Map<String, Class<?>> itemActionMap = new HashMap<String, Class<?>>();
 
 	/** 日志 */
-	private LogUtils logger = LogUtils.createInstance(textPane);
+	private LoggerUtils logger = LoggerUtils.createInstance(textPane);
 	/** 打印业务接口 */
 	private LotteryPrinterService lotteryPrinterService = new LotteryPrinterServiceImpl();;
 
@@ -99,21 +112,20 @@ public class MainUI extends JFrame implements ActionListener {
 		// 初始界面布局、注册监听
 		initLayout();
 
-		itemActionMap.put("fileImportItem", "file.FileImportItemUI");
+		itemActionMap.put("fileImportItem", FileImportItemUI.class);
 		// itemActionMap.put("previewItem", "preview.PreviewItemUI");
-		itemActionMap.put("choiceServiceItem", "service.ChoiceServiceItemUI");
-		itemActionMap.put("produceTaskItem", "run.ProduceTaskItemUI");
-		itemActionMap.put("runItem", "run.RunItemUI");
-		itemActionMap.put("switchItem", "run.SwitchItemUI");
-		itemActionMap.put("singleHandleItem", "reprint.SingleHandleItemUI");
-		itemActionMap.put("batchHandleItem", "reprint.BatchHandleItemUI");
-		itemActionMap.put("excelHandleItem", "reprint.ExcelHandleItemUI");
-		itemActionMap.put("coordItem", "setting.CoordItemUI");
-		itemActionMap.put("fontSizeItem", "setting.FontSizeItemUI");
-		itemActionMap.put("taskAssignIntervalItem",
-				"setting.TaskAssignIntervalItemUI");
-		itemActionMap.put("versionsItem", "help.VersionItemUI");
-		itemActionMap.put("authorItem", "help.DeveloperItemUI");
+		itemActionMap.put("choiceServiceItem", ChoiceServiceItemUI.class);
+		itemActionMap.put("produceTaskItem", ProduceTaskItemUI.class);
+		itemActionMap.put("runItem", RunItemUI.class);
+		itemActionMap.put("switchItem", SwitchItemUI.class);
+		itemActionMap.put("singleHandleItem", SingleHandleItemUI.class);
+		itemActionMap.put("batchHandleItem", BatchHandleItemUI.class);
+		itemActionMap.put("excelHandleItem", ExcelHandleItemUI.class);
+		itemActionMap.put("coordItem", CoordItemUI.class);
+		itemActionMap.put("fontSizeItem", FontSizeItemUI.class); 
+		itemActionMap.put("taskAssignIntervalItem", TaskAssignIntervalItemUI.class);
+		itemActionMap.put("versionsItem", VersionItemUI.class);
+		itemActionMap.put("authorItem", DeveloperItemUI.class);
 	}
 
 	/**
@@ -243,20 +255,18 @@ public class MainUI extends JFrame implements ActionListener {
 	 * 
 	 * @param clazzName
 	 */
-	private void actions(String clazzName) {
-		Class<?> clazz = null;
+	private void actions(Class<?> actionClazz) {
 		try {
-			clazz = Class.forName("org.walkerljl.lotteryprinter.client.ui.swing."
-					+ clazzName);
-			Constructor<?> constructor = clazz.getConstructor(MainUI.class);
+			Constructor<?> constructor = actionClazz.getConstructor(MainUI.class);
 			ItemAction itemAction = (ItemAction) constructor.newInstance(this);
 			// 通过反射调用类里面指定的方法
 			itemAction.action();
 
 		} catch (Exception ex) {
-			String errMsg = "创建响应UI出错, " + clazz;
+			String errMsg = "创建响应UI出错, " + actionClazz;
 			logger.error(errMsg);
-			LOGGER.error(errMsg, errMsg);
+			LOGGER.error(errMsg, ex);
+			ex.printStackTrace();
 		}
 	}
 
@@ -313,7 +323,7 @@ public class MainUI extends JFrame implements ActionListener {
 		return lotteryPrinterService;
 	}
 
-	public LogUtils getLogger() {
+	public LoggerUtils getLogger() {
 		return logger;
 	}
 

@@ -5,8 +5,7 @@ package org.walkerljl.lotteryprinter.client.enums;
  * 
  * @author lijunlin
  */
-public enum SystemState 
-{
+public enum SystemState {
 	/**
 	 * 初始化状态
 	 */

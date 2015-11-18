@@ -1,33 +1,33 @@
-package org.walkerljl.lotteryprinter.client.core.runnable;
+package org.walkerljl.lotteryprinter.client.schedule.job;
 
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.walkerljl.lotteryprinter.client.common.ExcelUtils;
 import org.walkerljl.lotteryprinter.client.common.ExcelUtilException;
-import org.walkerljl.lotteryprinter.client.common.LogUtils;
-import org.walkerljl.lotteryprinter.client.core.ScheduleCenter;
+import org.walkerljl.lotteryprinter.client.common.ExcelUtils;
+import org.walkerljl.lotteryprinter.client.common.LoggerUtils;
 import org.walkerljl.lotteryprinter.client.entity.Lottery;
 import org.walkerljl.lotteryprinter.client.entity.Task;
+import org.walkerljl.lotteryprinter.client.schedule.Scheduler;
 
 /**
  * 加载数据
  * 
  * @author lijunlin
  */
-public class LoadExcelJob implements Runnable {
+public class LoadExcelTaskJob implements Runnable {
 	/** 调度员 */
-	private ScheduleCenter scheduler;
+	private Scheduler scheduler;
 	/** Excel文件路径 */
 	private String filePath;
 	/** Excel文件头 */
 	private String[] header;
 	/** 每版打印彩票数量 */
-	private int countOfPage = ScheduleCenter.COUNT_OF_PAGE;
+	private int countOfPage = Scheduler.COUNT_OF_PAGE;
 	/** 日志 */
-	private LogUtils logger = LogUtils.getInstance();
+	private LoggerUtils logger = LoggerUtils.getInstance();
 
 	/**
 	 * 构造函数
@@ -36,7 +36,7 @@ public class LoadExcelJob implements Runnable {
 	 * @param filePath
 	 * @param header
 	 */
-	public LoadExcelJob(ScheduleCenter scheduler, String filePath,
+	public LoadExcelTaskJob(Scheduler scheduler, String filePath,
 			String[] header) {
 		this.scheduler = scheduler;
 		this.filePath = filePath;
@@ -170,8 +170,9 @@ public class LoadExcelJob implements Runnable {
 	 */
 	private String handleCell(Object data) {
 		// 判断是否为null
-		if (data == null)
+		if (data == null) {
 			return "";
+		}
 
 		// 类型转换，处理科学计数法的问题
 		DecimalFormat df = new DecimalFormat("0");

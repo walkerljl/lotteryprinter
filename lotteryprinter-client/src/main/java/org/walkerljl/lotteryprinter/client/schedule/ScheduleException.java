@@ -1,4 +1,4 @@
-package org.walkerljl.lotteryprinter.client.core;
+package org.walkerljl.lotteryprinter.client.schedule;
 
 /**
  * 

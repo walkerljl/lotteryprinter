@@ -1,11 +1,16 @@
 package org.walkerljl.lotteryprinter.client.entity;
 
+import java.io.Serializable;
+
 /**
  * 任务
  * 
  * @author lijunlin
  */
-public class Task {
+public class Task implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	/** 编号 */
 	private Long id;
 	/** 彩票数组 */

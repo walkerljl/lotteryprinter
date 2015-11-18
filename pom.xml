@@ -6,9 +6,13 @@
 	<version>3.0.1</version>
 	<packaging>pom</packaging>
 
+	<modules>
+		<module>lotteryprinter-client</module>
+	</modules>
+
 	<properties>
 		<jdk.version>1.8</jdk.version>
-		<orgwalkerljl.commons.version>0.0.1-SNAPSHOT</orgwalkerljl.commons.version>
+		<orgwalkerljl.commons.version>1.0.1-SNAPSHOT</orgwalkerljl.commons.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -69,7 +73,4 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<modules>
-		<module>lotteryprinter-client</module>
-	</modules>
 </project>

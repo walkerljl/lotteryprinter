@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import java.util.Properties;
 
 import javax.print.Doc;
 import javax.print.DocFlavor;
@@ -22,7 +23,9 @@ import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.MediaSizeName;
 import javax.print.attribute.standard.OrientationRequested;
 
+import org.walkerljl.commons.util.PropertiesUtils;
 import org.walkerljl.lotteryprinter.client.entity.Lottery;
+import org.walkerljl.lotteryprinter.client.entity.Position;
 import org.walkerljl.lotteryprinter.client.entity.Task;
 
 /**
@@ -60,47 +63,45 @@ public class PrintUtils implements Printable {
 	 * 加载配置文件中的参数
 	 */
 	private void loadPropertiesArgument() {
-		PropertiesUtils util = null;
+		Properties properties = PropertiesUtils.createFromInputStream(PrintUtils.class.getResourceAsStream(Constants.CONF_PROPERTIES));
 		// 加载字体大小配置文件
-		util = new PropertiesUtils("./config/font-size.properties");
-		int fontSize = Integer.parseInt(util.getValue("fontSize"));
+		int fontSize = PropertiesUtils.getPropertyAsInt(properties, "fontSize");
 		this.font = new Font("Courier", Font.PLAIN, fontSize);
 
 		// 加载打印坐标配置文件
-		util = new PropertiesUtils("./config/coord.properties");
+		properties = PropertiesUtils.createFromInputStream(PrintUtils.class.getResourceAsStream(Constants.CONF_PROPERTIES_PRINT_COORD));
 		// 设置打印坐标
 		positions = new Position[14];
-		positions[0] = new Position(util.getValue("topVersionX"),
-				util.getValue("topVersionY"));
+		positions[0] = new Position(PropertiesUtils.getPropertyAsString(properties, "topVersionX"), 
+				PropertiesUtils.getPropertyAsString(properties, "topVersionY"));
 
-		positions[1] = new Position(util.getValue("lottery1X"),
-				util.getValue("lottery1Y"));
-		positions[2] = new Position(util.getValue("lottery2X"),
-				util.getValue("lottery2Y"));
-		positions[3] = new Position(util.getValue("lottery3X"),
-				util.getValue("lottery3Y"));
-		positions[4] = new Position(util.getValue("lottery4X"),
-				util.getValue("lottery4Y"));
-		positions[5] = new Position(util.getValue("lottery5X"),
-				util.getValue("lottery5Y"));
-		positions[6] = new Position(util.getValue("lottery6X"),
-				util.getValue("lottery6Y"));
+		positions[1] = new Position(PropertiesUtils.getPropertyAsString(properties, "lottery1X"), 
+				PropertiesUtils.getPropertyAsString(properties, "lottery1Y"));
+		positions[2] = new Position(PropertiesUtils.getPropertyAsString(properties, "lottery2X"), 
+				PropertiesUtils.getPropertyAsString(properties, "lottery2Y"));
+		positions[3] = new Position(PropertiesUtils.getPropertyAsString(properties, "lottery3X"), 
+				PropertiesUtils.getPropertyAsString(properties, "lottery3Y"));
+		positions[4] = new Position(PropertiesUtils.getPropertyAsString(properties, "lottery4X"), 
+				PropertiesUtils.getPropertyAsString(properties, "lottery4Y"));
+		positions[5] = new Position(PropertiesUtils.getPropertyAsString(properties, "lottery5X"), 
+				PropertiesUtils.getPropertyAsString(properties, "lottery5Y"));
+		positions[6] = new Position(PropertiesUtils.getPropertyAsString(properties, "lottery6X"), 
+				PropertiesUtils.getPropertyAsString(properties, "lottery6Y"));
+		positions[7] = new Position(PropertiesUtils.getPropertyAsString(properties, "lottery7X"), 
+				PropertiesUtils.getPropertyAsString(properties, "lottery7Y"));
+		positions[8] = new Position(PropertiesUtils.getPropertyAsString(properties, "lottery8X"), 
+				PropertiesUtils.getPropertyAsString(properties, "lottery8Y"));
+		positions[9] = new Position(PropertiesUtils.getPropertyAsString(properties, "lottery9X"), 
+				PropertiesUtils.getPropertyAsString(properties, "lottery9Y"));
+		positions[10] = new Position(PropertiesUtils.getPropertyAsString(properties, "lottery10X"), 
+				PropertiesUtils.getPropertyAsString(properties, "lottery10Y"));
+		positions[11] = new Position(PropertiesUtils.getPropertyAsString(properties, "lottery11X"), 
+				PropertiesUtils.getPropertyAsString(properties, "lottery11Y"));
+		positions[12] = new Position(PropertiesUtils.getPropertyAsString(properties, "lottery12X"), 
+				PropertiesUtils.getPropertyAsString(properties, "lottery12Y"));
 
-		positions[7] = new Position(util.getValue("lottery7X"),
-				util.getValue("lottery7Y"));
-		positions[8] = new Position(util.getValue("lottery8X"),
-				util.getValue("lottery8Y"));
-		positions[9] = new Position(util.getValue("lottery9X"),
-				util.getValue("lottery9Y"));
-		positions[10] = new Position(util.getValue("lottery10X"),
-				util.getValue("lottery10Y"));
-		positions[11] = new Position(util.getValue("lottery11X"),
-				util.getValue("lottery11Y"));
-		positions[12] = new Position(util.getValue("lottery12X"),
-				util.getValue("lottery12Y"));
-
-		positions[13] = new Position(util.getValue("bottomVersionX"),
-				util.getValue("bottomVersionY"));
+		positions[13] = new Position(PropertiesUtils.getPropertyAsString(properties, "bottomVersionX"), 
+				PropertiesUtils.getPropertyAsString(properties, "bottomVersionY"));
 	}
 
 	/**

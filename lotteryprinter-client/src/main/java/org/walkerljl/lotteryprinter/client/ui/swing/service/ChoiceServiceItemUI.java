@@ -102,10 +102,11 @@ public class ChoiceServiceItemUI extends JDialog implements ItemAction,
 	public void actionPerformed(ActionEvent evt) {
 		Object src = evt.getSource();
 
-		if (src == okButton)
+		if (src == okButton) {
 			getSelectedPrintServices();
-		else if (src == cancelButton)
+		} else if (src == cancelButton) {
 			cancel();
+		}
 	}
 
 	/**
@@ -117,11 +118,13 @@ public class ChoiceServiceItemUI extends JDialog implements ItemAction,
 		String printService = item.getText();
 
 		if (e.getStateChange() == ItemEvent.SELECTED) {
-			if (!selectedPrintServices.containsKey(printService))
+			if (!selectedPrintServices.containsKey(printService)) {
 				selectedPrintServices.put(printService, null);
+			}
 		} else if (e.getStateChange() == ItemEvent.DESELECTED) {
-			if (selectedPrintServices.containsKey(printService))
+			if (selectedPrintServices.containsKey(printService)) {
 				selectedPrintServices.remove(printService);
+			}
 		}
 	}
 

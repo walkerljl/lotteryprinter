@@ -1,23 +1,23 @@
-package org.walkerljl.lotteryprinter.client.core.runnable;
+package org.walkerljl.lotteryprinter.client.schedule.job;
 
 import java.util.Map;
 
-import org.walkerljl.lotteryprinter.client.common.LogUtils;
-import org.walkerljl.lotteryprinter.client.core.ScheduleCenter;
+import org.walkerljl.lotteryprinter.client.common.LoggerUtils;
 import org.walkerljl.lotteryprinter.client.entity.Task;
 import org.walkerljl.lotteryprinter.client.enums.ConsumerState;
 import org.walkerljl.lotteryprinter.client.enums.ProducerState;
+import org.walkerljl.lotteryprinter.client.schedule.Scheduler;
 
 /**
  * 生产者
  * 
  * @author lijunlin
  */
-public class ProduceTaskJob implements Runnable {
+public class ProducerJob implements Runnable {
 	/** 调度员 */
-	private ScheduleCenter scheduler;
+	private Scheduler scheduler;
 	/** 日志 */
-	private LogUtils logger = LogUtils.getInstance();
+	private LoggerUtils logger = LoggerUtils.getInstance();
 
 	/**
 	 * 构造函数
@@ -26,7 +26,7 @@ public class ProduceTaskJob implements Runnable {
 	 * @param path
 	 * @param header
 	 */
-	public ProduceTaskJob(ScheduleCenter scheduler) {
+	public ProducerJob(Scheduler scheduler) {
 		this.scheduler = scheduler;
 		// 设置线程名称
 		Thread.currentThread().setName("Producer");

@@ -144,8 +144,9 @@ public class PrintUtils implements Printable {
 			if (lotteries[i] != null) {
 				g2.drawString(lotteries[i].getSerialNumber(), position.getX(),
 						position.getY() - font.getSize());
-				g2.drawString(lotteries[i].getPassCode(), position.getX(),
-						position.getY() + 8.9f * 2.83f - font.getSize());
+				//v3.0.2只打印一行
+//				g2.drawString(lotteries[i].getPassCode(), position.getX(),
+//						position.getY() + 8.9f * 2.83f - font.getSize());
 			}
 		}
 

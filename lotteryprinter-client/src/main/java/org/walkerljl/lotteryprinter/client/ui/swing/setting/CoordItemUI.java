@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -150,7 +151,7 @@ public class CoordItemUI extends JFrame implements ItemAction, ActionListener {
 	 * 加载配置文件中的值到界面
 	 */
 	private void loadProperties() {
-		Properties properties = PropertiesUtils.createFromInputStream(getClass().getResourceAsStream(Constants.CONF_PROPERTIES_PRINT_COORD));
+		Properties properties = PropertiesUtils.createFromFile(new File(Constants.getPrintCoordFilePath()));
 
 		// 加载配置文件中的数据
 		topVersion.setXValue(PropertiesUtils.getPropertyAsFloat(properties, "topVersionX"));
@@ -227,7 +228,7 @@ public class CoordItemUI extends JFrame implements ItemAction, ActionListener {
 			properties.setProperty("bottomVersionX", bottomVersion.getXValue());
 			properties.setProperty("bottomVersionY", bottomVersion.getYValue());
 
-			PropertiesUtils.writeToFile(properties, getClass().getResource(Constants.CONF_PROPERTIES_PRINT_COORD).getFile());
+			PropertiesUtils.writeToFile(properties, new File(Constants.getPrintCoordFilePath()));
 
 			MessageUtils.info("                                设置成功！");
 		} catch (Exception ex) {

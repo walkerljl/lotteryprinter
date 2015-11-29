@@ -13,7 +13,9 @@
 	<properties>
 		<jdk.version>1.8</jdk.version>
 		<orgwalkerljl.commons.version>1.0.1-SNAPSHOT</orgwalkerljl.commons.version>
+		<orgwalkerljl.log.version>1.0.0-SNAPSHOT</orgwalkerljl.log.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.basedir></project.basedir>
 	</properties>
 
 	<build>
@@ -36,13 +38,13 @@
 		<dependencies>
 			<dependency>
 				<groupId>org.walkerljl.commons</groupId>
-				<artifactId>orgwalkerljl-commons-log</artifactId>
+				<artifactId>orgwalkerljl-commons-core</artifactId>
 				<version>${orgwalkerljl.commons.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.walkerljl.commons</groupId>
-				<artifactId>orgwalkerljl-commons-core</artifactId>
-				<version>${orgwalkerljl.commons.version}</version>
+				<groupId>org.walkerljl.log</groupId>
+				<artifactId>orgwalkerljl-log-core</artifactId>
+				<version>${orgwalkerljl.log.version}</version>
 			</dependency>
 			<!-- excel -->
 			<dependency>

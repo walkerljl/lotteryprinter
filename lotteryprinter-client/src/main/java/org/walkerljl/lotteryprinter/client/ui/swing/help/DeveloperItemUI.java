@@ -1,5 +1,6 @@
 package org.walkerljl.lotteryprinter.client.ui.swing.help;
 
+import java.io.File;
 import java.util.Properties;
 
 import org.walkerljl.commons.util.PropertiesUtils;
@@ -24,7 +25,7 @@ public class DeveloperItemUI implements ItemAction {
 
 	@Override
 	public void action() {
-		Properties properties = PropertiesUtils.createFromInputStream(getClass().getResourceAsStream(Constants.CONF_PROPERTIES));
+		Properties properties = PropertiesUtils.createFromFile(new File(Constants.getConfFilePath()));
 		// 显示开发者信息
 		StringBuilder info = new StringBuilder();
 		info.append("技术支持: ").append(PropertiesUtils.getPropertyAsString(properties, "company")).append("\n");

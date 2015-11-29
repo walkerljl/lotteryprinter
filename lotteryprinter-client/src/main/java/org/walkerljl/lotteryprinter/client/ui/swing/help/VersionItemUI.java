@@ -1,5 +1,6 @@
 package org.walkerljl.lotteryprinter.client.ui.swing.help;
 
+import java.io.File;
 import java.util.Properties;
 
 import org.walkerljl.commons.util.PropertiesUtils;
@@ -26,7 +27,7 @@ public class VersionItemUI implements ItemAction {
 	public void action() {
 		// 显示开发者信息
 		StringBuilder info = new StringBuilder();
-		Properties properties = PropertiesUtils.createFromInputStream(getClass().getResourceAsStream(Constants.CONF_PROPERTIES));
+		Properties properties = PropertiesUtils.createFromFile(new File(Constants.getConfFilePath()));
 		info.append("当前程序版本:  ").append(PropertiesUtils.getPropertyAsString(properties, "version"));
 		MessageUtils.info(info.toString());
 	}

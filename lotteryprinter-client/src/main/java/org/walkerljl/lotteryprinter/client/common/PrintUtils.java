@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import java.io.File;
 import java.util.Properties;
 
 import javax.print.Doc;
@@ -63,13 +64,13 @@ public class PrintUtils implements Printable {
 	 * 加载配置文件中的参数
 	 */
 	private void loadPropertiesArgument() {
-		Properties properties = PropertiesUtils.createFromInputStream(PrintUtils.class.getResourceAsStream(Constants.CONF_PROPERTIES));
+		Properties properties = PropertiesUtils.createFromFile(new File(Constants.getConfFilePath()));
 		// 加载字体大小配置文件
 		int fontSize = PropertiesUtils.getPropertyAsInt(properties, "fontSize");
 		this.font = new Font("Courier", Font.PLAIN, fontSize);
 
 		// 加载打印坐标配置文件
-		properties = PropertiesUtils.createFromInputStream(PrintUtils.class.getResourceAsStream(Constants.CONF_PROPERTIES_PRINT_COORD));
+		properties = PropertiesUtils.createFromFile(new File(Constants.getPrintCoordFilePath()));
 		// 设置打印坐标
 		positions = new Position[14];
 		positions[0] = new Position(PropertiesUtils.getPropertyAsString(properties, "topVersionX"), 

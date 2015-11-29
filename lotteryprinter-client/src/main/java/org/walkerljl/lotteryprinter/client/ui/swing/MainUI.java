@@ -16,8 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
-import org.walkerljl.commons.log.Logger;
-import org.walkerljl.commons.log.LoggerFactory;
 import org.walkerljl.lotteryprinter.client.common.LoggerUtils;
 import org.walkerljl.lotteryprinter.client.common.MessageUtils;
 import org.walkerljl.lotteryprinter.client.common.SystemProperties;
@@ -45,9 +43,7 @@ import org.walkerljl.lotteryprinter.client.ui.swing.setting.TaskAssignIntervalIt
 public class MainUI extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(MainUI.class);
-	
+		
 	/*
 	 * 主窗体元素
 	 */
@@ -264,9 +260,7 @@ public class MainUI extends JFrame implements ActionListener {
 
 		} catch (Exception ex) {
 			String errMsg = "创建响应UI出错, " + actionClazz;
-			logger.error(errMsg);
-			LOGGER.error(errMsg, ex);
-			ex.printStackTrace();
+			logger.error(errMsg, ex);
 		}
 	}
 

@@ -1,5 +1,6 @@
 package org.walkerljl.lotteryprinter.client.schedule.job;
 
+import java.io.File;
 import java.util.Properties;
 
 import javax.print.PrintService;
@@ -24,8 +25,6 @@ public class ConsumerJob implements Runnable {
 	private Scheduler scheduler;
 	/** 打印服务 */
 	private PrintService printService;
-	/** 配置文件路径 */
-	private String fileName = Constants.CONF_PROPERTIES;
 	/** 任务分配时间间隔 */
 	private int taskAssignInterval = 0;
 	/** 日志 */
@@ -41,7 +40,7 @@ public class ConsumerJob implements Runnable {
 		this.scheduler = scheduler;
 
 		// 加载配置文件中任务分配时间间隔信息
-		Properties properties = PropertiesUtils.createFromInputStream(getClass().getResourceAsStream(fileName));
+		Properties properties = PropertiesUtils.createFromFile(new File(Constants.getConfFilePath()));
 		this.taskAssignInterval = PropertiesUtils.getPropertyAsInt(properties,
 				"taskAssignInterval");
 	}

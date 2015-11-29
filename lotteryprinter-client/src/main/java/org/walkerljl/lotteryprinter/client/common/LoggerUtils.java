@@ -9,8 +9,8 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import org.walkerljl.commons.datetime.DateUtils;
-import org.walkerljl.commons.log.Logger;
-import org.walkerljl.commons.log.LoggerFactory;
+import org.walkerljl.log.Logger;
+import org.walkerljl.log.LoggerFactory;
 
 
 /**

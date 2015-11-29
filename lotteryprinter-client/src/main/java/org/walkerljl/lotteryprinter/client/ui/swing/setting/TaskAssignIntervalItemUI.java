@@ -1,5 +1,6 @@
 package org.walkerljl.lotteryprinter.client.ui.swing.setting;
 
+import java.io.File;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
@@ -29,7 +30,7 @@ public class TaskAssignIntervalItemUI implements ItemAction {
 	 */
 	public TaskAssignIntervalItemUI(MainUI mainUI) {
 		// 加载配置文件中的数据到界面
-		Properties properties = PropertiesUtils.createFromInputStream(getClass().getResourceAsStream(Constants.CONF_PROPERTIES));
+		Properties properties = PropertiesUtils.createFromFile(new File(Constants.getConfFilePath()));
 		this.taskAssignInterval = PropertiesUtils.getPropertyAsString(properties, PROPERTT_KEY);
 	}
 
@@ -49,9 +50,9 @@ public class TaskAssignIntervalItemUI implements ItemAction {
 		}
 
 		try {
-			Properties properties = new Properties();
+			Properties properties = PropertiesUtils.createFromFile(new File(Constants.getConfFilePath()));
 			properties.setProperty(PROPERTT_KEY, result);
-			PropertiesUtils.writeToFile(properties, getClass().getResource(Constants.CONF_PROPERTIES).getFile());
+			PropertiesUtils.writeToFile(properties, new File(Constants.getConfFilePath()));
 			MessageUtils.info("设置成功！");
 		} catch (Exception ex) {
 			LoggerUtils.getInstance().error("任务分配时间间隔设置出错！", ex);
